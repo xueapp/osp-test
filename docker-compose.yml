@@ -34,6 +34,34 @@ services:
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
 
+  customers:
+    build: './customers'
+
+    container_name: 'customers'
+
+    ports:
+      - '5555:5555'
+
+    depends_on:
+      - frontend
+
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+
+  orders:
+    build: './orders'
+
+    container_name: 'orders'
+
+    ports:
+      - '7777:7777'
+
+    depends_on:
+      - frontend
+
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+
   nginx:
     # Use latest version of the public nginx image.
     image: nginx:latest
@@ -50,3 +78,5 @@ services:
     depends_on:
       - frontend
       - books
+      - customers
+      - orders

@@ -18,7 +18,8 @@ app.get('/', (req, res) => {
 });
 
 const books = `http://localhost:8888`;
-
+const customers = `http://localhost:5555`;
+const orders = `http://localhost:7777`;
 
 app.use('/', chronos.track());
 
@@ -30,7 +31,15 @@ app.all('/books/*', (req, res) => {
   res.redirect(books + req.originalUrl);
 });
 
+app.all('/customers/*', (req, res) => {
+  console.log('redirecting to customers');
+  res.redirect(customers + req.originalUrl);
+});
 
+app.all('/orders/*', (req, res) => {
+  console.log('redirecting to orders');
+  res.redirect(orders + req.originalUrl);
+});
 
 // Global error handler
 app.use((error, req, res, next) => {
